@@ -89,7 +89,7 @@ $ grep "ProtocolName" tmp_dcm2bids/helper/003_54321_T2w_20211019195649.json
 
 The `dcm2bids` command requires the JSON config file.
 
-Example of `dicom_to_bids_config.json` JSON config file:
+Example of the [dicom_to_bids_config.json](dicom_to_bids_config.json) config file:
 
 ```json
 {
@@ -118,7 +118,7 @@ Example of `dicom_to_bids_config.json` JSON config file:
 
 To encode the source DICOM subjects (subject `54321` and subject `65432`) to the output BIDS subjects (subject `sub-001` and subject `sub-002`), we need to know the conversion logic.
 
-The `participants.tsv` file contains `participant_id` and `source_id` columns, which can be used for this conversion. Thus, create the following `participants.tsv ` file as follow:
+The `participants.tsv` file contains `participant_id` and `source_id` columns, which can be used for this conversion. Thus, create the following `participants.tsv ` file as follows:
 
 ```
 participant_id	source_id	sex	age
@@ -130,7 +130,7 @@ Note: besides the `participant_id` and `source_id` columns, you can include othe
 
 ## 5. Run the conversion
 
-You can run the `dcm2bids` conversion across all subjects using the wrapper script. Note that the wrapper script automatically reads the `participant_id` and `source_id` columns from the `participants.tsv` file.
+You can run the `dcm2bids` conversion across all subjects using [the wrapper script](wrapper_dcm2bids.sh). Note that the wrapper script automatically reads the `participant_id` and `source_id` columns from the `participants.tsv` file.
 
 ```console
 # make sure that the conda environment is activated
