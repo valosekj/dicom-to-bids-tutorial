@@ -137,12 +137,12 @@ You can run the `dcm2bids` conversion across all subjects using the wrapper scri
 conda activate dcm2bids
 ```
 
-```
+```console
 # run the wrapper script
 ./wrapper_dcm2bids.sh
 ```
 
-```
+```console
 # deactivate the conda environment
 conda deactivate
 ```
