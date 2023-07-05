@@ -13,3 +13,4 @@ while IFS=$'\t' read -r participant_id source_id rest_of_line; do
 done < <(sed 's/\r$//' participants.tsv | tail -n +2)
 # tail -n +2 participants.tsv: remove the first line of the file (header)
 # <(...): this is a bash trick to read the output of a command as input of another command
+# sed 's/\r$//' is used to remove Windows newline characters (^M)
