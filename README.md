@@ -138,6 +138,9 @@ sub-002	65432	F	20
 
 Note: besides the `participant_id` and `source_id` columns, you can include other useful columns, such as `sex` and `age`. See the `participants.tsv` template [here](https://intranet.neuro.polymtl.ca/data/dataset-curation.html#participants-tsv).
 
+> [!WARNING]
+> Since v3.3.0, `dcm2bids` automatically updates `participants.tsv` in the output BIDS directory after each converted participant. If the participant is already listed, the file is left untouched. If not, the file is **rewritten with only the `participant_id` column** (i.e., `source_id`, `sex`, `age` etc. are dropped). Therefore, make sure all participants are listed in `participants.tsv` before running the conversion (and keep the file under version control).
+
 ## 5. Run the conversion
 
 You can run the `dcm2bids` conversion across all subjects using [the wrapper script](wrapper_dcm2bids.sh). Note that the wrapper script automatically reads the `participant_id` and `source_id` columns from the `participants.tsv` file.
