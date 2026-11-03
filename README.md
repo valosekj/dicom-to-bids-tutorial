@@ -6,14 +6,22 @@ Install `dcm2bids` and `dcm2niix` tools, for example, by conda:
 
 ```console
 # create conda environment
-conda create --name dcm2bids python=3.8
+conda create --name dcm2bids python=3.11
 
 # activate the environment
 conda activate dcm2bids
 
 # install dcm2bids and dcm2niix
-conda install -c conda-forge dcm2bids dcm2niix
+conda install -c conda-forge "dcm2bids>=3.3" dcm2niix
 ```
+
+```console
+# check the installed version
+dcm2bids -v
+```
+
+> [!NOTE]
+> This tutorial requires `dcm2bids` v3.x. If you have an old config file written for `dcm2bids` 2.x, see the [upgrade guide](https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x).
 
 ## 2. Explore your data
 
