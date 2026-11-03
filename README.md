@@ -95,16 +95,16 @@ Example of the [dicom_to_bids_config.json](dicom_to_bids_config.json) config fil
 {
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "SeriesDescription": "T1w",
                 "ProtocolName": "T1w"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "T2w",
                 "ProtocolName": "T2w"
@@ -113,6 +113,8 @@ Example of the [dicom_to_bids_config.json](dicom_to_bids_config.json) config fil
     ]
 }
 ```
+
+Note: Each description must contain the `datatype`, `suffix` and `criteria` keys. Since `dcm2bids` v3.3.0, config files using the old 2.x keys (`dataType`, `modalityLabel`, `customLabels`, `sidecarChanges`, `intendedFor`) are rejected with `ValueError: Execution stopped due to invalid config file.`
 
 ## 4. Create `participants.tsv` file
 
