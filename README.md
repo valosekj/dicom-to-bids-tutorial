@@ -6,14 +6,22 @@ Install `dcm2bids` and `dcm2niix` tools, for example, by conda:
 
 ```console
 # create conda environment
-conda create --name dcm2bids python=3.8
+conda create --name dcm2bids python=3.11
 
 # activate the environment
 conda activate dcm2bids
 
 # install dcm2bids and dcm2niix
-conda install -c conda-forge dcm2bids dcm2niix
+conda install -c conda-forge "dcm2bids>=3.3" dcm2niix
 ```
+
+```console
+# check the installed version
+dcm2bids -v
+```
+
+> [!NOTE]
+> This tutorial requires `dcm2bids` v3.x. If you have an old config file written for `dcm2bids` 2.x, see the [upgrade guide](https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x).
 
 ## 2. Explore your data
 
@@ -95,16 +103,16 @@ Example of the [dicom_to_bids_config.json](dicom_to_bids_config.json) config fil
 {
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "SeriesDescription": "T1w",
                 "ProtocolName": "T1w"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "T2w",
                 "ProtocolName": "T2w"
@@ -113,6 +121,8 @@ Example of the [dicom_to_bids_config.json](dicom_to_bids_config.json) config fil
     ]
 }
 ```
+
+Note: Each description must contain the `datatype`, `suffix` and `criteria` keys. Since `dcm2bids` v3.3.0, config files using the old 2.x keys (`dataType`, `modalityLabel`, `customLabels`, `sidecarChanges`, `intendedFor`) are rejected with `ValueError: Execution stopped due to invalid config file.`
 
 ## 4. Create `participants.tsv` file
 
@@ -127,6 +137,9 @@ sub-002	65432	F	20
 ```
 
 Note: besides the `participant_id` and `source_id` columns, you can include other useful columns, such as `sex` and `age`. See the `participants.tsv` template [here](https://intranet.neuro.polymtl.ca/data/dataset-curation.html#participants-tsv).
+
+> [!WARNING]
+> Since v3.3.0, `dcm2bids` automatically updates `participants.tsv` in the output BIDS directory after each converted participant. If the participant is already listed, the file is left untouched. If not, the file is **rewritten with only the `participant_id` column** (i.e., `source_id`, `sex`, `age` etc. are dropped). Therefore, make sure all participants are listed in `participants.tsv` before running the conversion (and keep the file under version control).
 
 ## 5. Run the conversion
 
